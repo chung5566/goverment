@@ -1,0 +1,318 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+
+
+
+ 
+
+<html>
+    <HEAD>
+        
+        <META http-equiv="Content-Type" content="text/html; charset=BIG5">
+        <META name="GENERATOR" content="IBM Software Development Platform">
+        <META http-equiv="Content-Style-Type" content="text/css">
+        <LINK href="css/op.css" rel="stylesheet" type="text/css">
+        <script src="scripts/Validator.js"></script>
+        <script src="scripts/prototype.js"></script>
+        <script src="scripts/postback.js"></script>
+        <script src="scripts/utility.js"></script> 
+        <TITLE></TITLE>
+    </HEAD>
+    <script language="javascript">
+        
+        // 儲存表單
+    function doAction(oForm, method){        
+        
+        Validator.init(oForm);
+        
+        
+        Validator.compareWithSysDate("puDateBeg", "<=", true, "拾得日期-起", "日期");
+        Validator.compareWithSysDate("puDateEnd", "<=", true, "拾得日期-迄", "日期");
+        if(oForm.elements["puDateBeg"].value!="" && oForm.elements["puDateEnd"].value!=""  ){
+            if(Validator.checkDateInterval("puDateBeg", "puDateEnd", true, "拾得日期"))
+                Validator.checkPuDateBeg("puDateBeg", 1021029,"拾得日期-起");
+        }
+        else{
+            if(Validator.checkDate("puDateBeg",false,"拾得日期-起"))
+                Validator.checkPuDateBeg("puDateBeg", 1021029,"拾得日期-起");
+            Validator.checkDate("puDateEnd",false,"拾得日期-迄");            
+        }        
+        Validator.checkLength("objNm",false,"物品名稱",50);
+        Validator.checkLength("objPuPlace",false,"拾得地點",100);
+        
+        if( Validator.isValid() == false ){
+            Validator.showMessage();
+        }else{
+            if(oForm.elements["unit1Cd"].value=="" && oForm.elements["puDateBeg"].value=="" && oForm.elements["puDateEnd"].value=="" && oForm.elements["objNm"].value=="" && oForm.elements["objPuPlace"].value==""){
+                alert("請輸入至少一項查詢條件！");
+            }
+            else{
+                oForm.method.value = method;
+                oForm.submit();
+            }
+        }
+    }
+    
+        function pageOnload(oForm){
+
+            
+        }
+    
+    </script>
+    
+    
+    
+    <BODY ONLOAD="pageOnload(document.forms[0])">
+        
+        <div class="FuncName">拾得遺失物招領公告資料查詢作業</div>
+            
+        <form name="oP01A01Q_01Form" method="post" action="/NPA97-217Client/oP01A01Q_01Action.do" class="Form1">
+            <input type="hidden" name="method" value="doList">
+            <input type="hidden" name="action" value="">
+            <input type="hidden" name="currentPage" value="d-3657963-p=null">
+            
+            <!--
+            <font color="red" size="2">*僅供查詢六個月內的公告資料</font>
+            -->
+            <table border="0" width="90%" align="center">
+                <tbody>
+                <tr>
+                    <td align="left">
+                        <span style="color:red; font-size:9pt">僅供查詢六個月內的公告資料</span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td>
+                            <fieldset><legend>查詢條件</legend>
+                                <table border="0" width="90%" align="center">
+                                    <tbody>
+
+                                        <tr>
+                                            <td class="Label">受理單位</td>
+                                            <td colspan="5">
+                                                <select name="unit1Cd" onchange="sUnit1(this.form, 'unit1Cd', '', 'unit2Cd', '', 'unit3Cd', '', 'cdName')" class="InputSelect"><option value=""></option>                                   
+                                                    <option value="A2700">A2700.中央警察大學</option>
+<option value="AWZ51">AWZ51.臺北市政府警察局刑事警察大隊督察組</option>
+<option value="A1000">A1000.警政署</option>
+<option value="AW000" selected="selected">AW000.臺北市政府警察局</option>
+<option value="AD000">AD000.新北市政府警察局</option>
+<option value="AB000">AB000.臺中市政府警察局</option>
+<option value="AC000">AC000.臺南市政府警察局</option>
+<option value="AV000">AV000.高雄市政府警察局</option>
+<option value="A2200">A2200.刑事警察局</option>
+<option value="A2300">A2300.航空警察局</option>
+<option value="A2400">A2400.國道公路警察局</option>
+<option value="A2N00">A2N00.鐵路警察局</option>
+<option value="A2900">A2900.保安警察第一總隊</option>
+<option value="A2A00">A2A00.保安警察第二總隊</option>
+<option value="A2B00">A2B00.保安警察第三總隊</option>
+<option value="A2C00">A2C00.保安警察第四總隊</option>
+<option value="A2D00">A2D00.保安警察第五總隊</option>
+<option value="A2E00">A2E00.保安警察第六總隊</option>
+<option value="A2F00">A2F00.保安警察第七總隊</option>
+<option value="A2H00">A2H00.基隆港務警察總隊</option>
+<option value="A2I00">A2I00.臺中港務警察總隊</option>
+<option value="A2J00">A2J00.高雄港務警察總隊</option>
+<option value="A2K00">A2K00.花蓮港務警察總隊</option>
+<option value="A2O00">A2O00.警察通訊所</option>
+<option value="A2U00">A2U00.民防指揮管制所</option>
+<option value="A2M00">A2M00.警察廣播電臺</option>
+<option value="A2L00">A2L00.警察機械修理廠</option>
+<option value="A2800">A2800.臺灣警察專科學校</option>
+<option value="BE000">BE000.桃園縣政府警察局</option>
+<option value="BA000">BA000.基隆市警察局</option>
+<option value="BF000">BF000.新竹市警察局</option>
+<option value="BM000">BM000.嘉義市政府警察局</option>
+<option value="BG000">BG000.新竹縣政府警察局</option>
+<option value="BH000">BH000.苗栗縣警察局</option>
+<option value="BJ000">BJ000.彰化縣警察局</option>
+<option value="BK000">BK000.南投縣政府警察局</option>
+<option value="BL000">BL000.雲林縣警察局</option>
+<option value="BN000">BN000.嘉義縣警察局</option>
+<option value="BQ000">BQ000.屏東縣政府警察局</option>
+<option value="BT000">BT000.宜蘭縣政府警察局</option>
+<option value="BS000">BS000.花蓮縣警察局</option>
+<option value="BR000">BR000.臺東縣警察局</option>
+<option value="BU000">BU000.澎湖縣政府警察局</option>
+<option value="BY000">BY000.金門縣警察局</option>
+<option value="BZ000">BZ000.福建省連江縣警察局</option></select>
+                                                
+                                                <select name="unit2Cd" onchange="sUnit2(this.form, 'unit2Cd', '', 'unit3Cd', '', 'cdName')" class="InputSelect"><option value=""></option>
+                                                    
+                                                        <option value="AW0E1">AW0E1.北市警局少年隊</option>
+<option value="AW0I1">AW0I1.北市警局保安大隊</option>
+<option value="AW0U1">AW0U1.北市警局通信隊</option>
+<option value="AW0V1">AW0V1.北市警局捷運隊</option>
+<option value="AW0W1">AW0W1.北市警局婦幼隊</option>
+<option value="AW100" selected="selected">AW100.中山分局</option>
+<option value="AW200">AW200.大安分局</option>
+<option value="AW300">AW300.中正第一分局</option>
+<option value="AW400">AW400.中正第二分局</option>
+<option value="AW500">AW500.文山第二分局</option>
+<option value="AW600">AW600.文山第一分局</option>
+<option value="AW700">AW700.南港分局</option>
+<option value="AW800">AW800.內湖分局</option>
+<option value="AW900">AW900.北投分局</option>
+<option value="AWA00">AWA00.士林分局</option>
+<option value="AWB00">AWB00.信義分局</option>
+<option value="AWC00">AWC00.松山分局</option>
+<option value="AWD00">AWD00.大同分局</option>
+<option value="AWE00">AWE00.萬華分局</option>
+<option value="AWY00">AWY00.北市警局交通大隊</option>
+<option value="AWZ00">AWZ00.北市警局刑事大隊</option></select>
+                                                
+                                                <select name="unit3Cd" class="InputSelect"><option value=""></option>
+                                                    
+                                                        <option value="AW141">AW141.中山分局偵查隊</option>
+<option value="AW191">AW191.中山分局交通分</option>
+<option value="AW1A1">AW1A1.中山分局警備隊</option>
+<option value="AW1M1">AW1M1.中山一派出所</option>
+<option value="AW1N1">AW1N1.中山二派出所</option>
+<option value="AW1O1" selected="selected">AW1O1.圓山派出所</option>
+<option value="AW1P1">AW1P1.長春路派出所</option>
+<option value="AW1Q1">AW1Q1.長安東路派出所</option>
+<option value="AW1R1">AW1R1.民權一派出所</option>
+<option value="AW1S1">AW1S1.建國派出所</option>
+<option value="AW1T1">AW1T1.大直派出所</option></select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="Label">拾得日期起迄</td>
+                                            <td>
+                                                <input type="text" name="puDateBeg" maxlength="7" size="8" value="1021029" class="InputText"> ~
+                                                <input type="text" name="puDateEnd" maxlength="7" size="8" value="1030429" class="InputText">
+                                            </td>
+                                            <td class="Label">物品名稱</td>
+                                            <td>
+                                                <input type="text" name="objNm" maxlength="50" size="8" value="" class="InputText">
+                                            </td>            
+                                            <td class="Label">拾得地點</td>
+                                            <td>
+                                                <input type="text" name="objPuPlace" maxlength="100" size="8" value="" class="InputText">
+                                            </td>                                              
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="FunctionArea">
+                <input type="button" name="queryBtn" value="查詢" onclick="javascript:doAction(this.form, 'doQuery')" class="InputButton">
+            </div>
+                        
+            <table width="90%" border="0" align="center" class="box2">
+                <tr>
+                    <td>
+                        
+<table class="ListTable" id="OP01A01Q_01Data">
+<thead>
+<tr>
+<th class="First">選取</th>
+<th>收據編號</th>
+<th>受理單位</th>
+<th>拾得日期時間</th>
+<th>拾得地點</th>
+<th>公告內容</th></tr></thead>
+<tbody>
+<tr class="odd">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=276275" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10212AW1O1028RS</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">102/11/30 12:00</td>
+<td class="Left">台北市中山區玉門街1號(花博公園內)</td>
+<td class="Left">拾得人拾獲：粉紅色零錢包1只(內有新臺幣若干元)，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="even">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=278368" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10212AW1O10MK75</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">102/12/08 17:30</td>
+<td class="Left">新生北路與民權東路口高架橋下</td>
+<td title="拾得人拾獲：黑色手機袋1個(附藍色掛勾，內有名珠高爾夫貴賓證、新臺幣若干元、雙卡手機1支(廠牌型號：Coolpad 7296(中國大陸製)、顏色：黑色、IMEI：8830420237*****/8830420238*****)，請失主於公告期間內攜帶本人印章及身分證件前來認領。" class="Left">拾得人拾獲：黑色手機袋1個(附藍色掛勾，內有名珠高爾夫貴賓證、新臺幣若干元、雙卡手機1支(廠牌型號：Coolpad 7296(中國大陸製)、顏色：黑色、IMEI：8830420237*****/883...</td></tr>
+<tr class="odd">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=278971" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10212AW1O10SYST</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">102/12/09 12:00</td>
+<td class="Left">臺北市中山區花博公園新生園區內</td>
+<td class="Left">拾得人拾獲：新臺幣若干元，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="even">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=280924" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10212AW1O11CJ2H</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">102/12/17 18:35</td>
+<td class="Left">臺北市中山區農安街2巷內永好水果行前</td>
+<td class="Left">拾得人拾獲：黑色零錢包1只(內有新臺幣若干元)，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="odd">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=282580" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10212AW1O11V02H</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">102/12/23 17:33</td>
+<td class="Left">台北市大同區承德橋下迴轉道</td>
+<td class="Left">拾得人拾獲：新臺幣若干元整，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="even">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=287236" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10301AW1O10HVM9</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">103/01/03 09:13</td>
+<td class="Left">台北市中山區林森北路575號華德大樓4號電梯內</td>
+<td class="Left">拾得人拾獲：新臺幣若干元，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="odd">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=288692" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10301AW1O10V8UD</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">103/01/11 14:00</td>
+<td class="Left">臺北市立兒童育樂中心碰碰車區</td>
+<td class="Left">拾得人拾獲：PORTSAC手拿包1只(內有新加坡幣若干元、中國信託信用卡、招商銀行信用卡)，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="even">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=293145" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10301AW1O11YV1D</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">103/01/24 17:00</td>
+<td class="Left">台北市中山區玉門街1號(花博公園爭豔館中庭)</td>
+<td class="Left">拾得人拾獲：雙卡智慧型手機1.00個、SIM卡1.00張、SIM卡1.00張，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="odd">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=296683" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10302AW1O109NDT</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">103/02/04 13:40</td>
+<td class="Left">臺北市中山區中山北路三段181號後方(計程車休息站)</td>
+<td class="Left">拾得人拾獲：新台幣2190.00元，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr>
+<tr class="even">
+<td class="Center">
+                                <a href="oP01A01Q_01Action.do?method=doSelect&amp;action=query&amp;pbSeqNo=297872" target="detail">選取</a>
+                            </td>
+<td class="Center">OP10302AW1O10KLBD</td>
+<td class="Left">臺北市政府警察局中山分局圓山派出所</td>
+<td class="Center">103/02/07 21:20</td>
+<td class="Left">花博園區(花博營運大樓前花臺上)</td>
+<td class="Left">拾得人拾獲：閃光燈1.00台，請失主於公告期間六個月內攜帶本人印章及身分證件前來認領。</td></tr></tbody></table><center><span class="pagebanner">第1頁 (共2頁, 16筆)</span><span class="pagelinks">&nbsp;&nbsp;&nbsp;&nbsp;[第ㄧ頁/上ㄧ頁] <strong>1</strong>, <a href="/NPA97-217Client/oP01A01Q_01Action.do?d-3657963-p=2&amp;method=doQuery" title="前往第2頁">2</a> [<a href="/NPA97-217Client/oP01A01Q_01Action.do?d-3657963-p=2&amp;method=doQuery">下一頁</a>/<a href="/NPA97-217Client/oP01A01Q_01Action.do?d-3657963-p=2&amp;method=doQuery">最末頁</a>]</span></center>
+                    </td>
+                </tr>
+            </table>
+            
+        </form>
+    </body>
+</html>
